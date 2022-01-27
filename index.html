@@ -19,7 +19,7 @@
 
     <script>
       let options = ['rock', 'paper', 'scissor'];
-      let playerScore = 0;
+      let userScore = 0;
       let computerScore = 0;
 
       function getComputerPlay() {
@@ -43,20 +43,20 @@
 
       function playOneRound(userSelection, computerSelection) {
         if (userSelection === computerSelection) {
-          console.log('Tie game.');
+          return `Tie! You both played ${userSelection}.`;
         } else if (
           (userSelection === 'rock' && computerSelection === 'scissor') ||
           (userSelection === 'paper' && computerSelection === 'rock') ||
           (userSelection === 'scissor' && computerSelection === 'paper')
         ) {
           console.log(`You win! ${userSelection} beats ${computerSelection}.`);
-          playerScore++;
+          userScore++;
         } else {
           console.log(`You lose. ${computerSelection} beats ${userSelection}.`);
           computerScore++;
         }
         console.log(
-          `Current score: You: ${playerScore} - Computer: ${computerScore} `
+          `You have ${userScore}points. The computer has ${computerScore} points.`
         );
       }
     </script>
