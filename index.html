@@ -43,21 +43,26 @@
 
       function playOneRound(userSelection, computerSelection) {
         if (userSelection === computerSelection) {
-          return `Tie! You both played ${userSelection}.`;
+          console.log(`Tie! You both played ${userSelection}.`);
         } else if (
           (userSelection === 'rock' && computerSelection === 'scissor') ||
           (userSelection === 'paper' && computerSelection === 'rock') ||
           (userSelection === 'scissor' && computerSelection === 'paper')
         ) {
-          console.log(`You win! ${userSelection} beats ${computerSelection}.`);
+          userSelection = capitalize(userSelection);
+          console.log(`You won! ${userSelection} beats ${computerSelection}!`);
           userScore++;
         } else {
+          computerSelection = capitalize(computerSelection);
           console.log(`You lose. ${computerSelection} beats ${userSelection}.`);
           computerScore++;
         }
-        console.log(
-          `You have ${userScore}points. The computer has ${computerScore} points.`
-        );
+        return `You have ${userScore} points. The computer has ${computerScore} points.`;
+      }
+
+      function capitalize(str) {
+        let newStr = str[0].toUpperCase() + str.slice(1);
+        return newStr;
       }
     </script>
   </body>
