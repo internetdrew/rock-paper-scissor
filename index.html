@@ -66,9 +66,9 @@
         );
       }
 
-      function refreshSelections() {
-        userSelection = '';
-        computerSelection = '';
+      function capitalize(str) {
+        let newStr = str[0].toUpperCase() + str.slice(1);
+        return newStr;
       }
 
       function game() {
