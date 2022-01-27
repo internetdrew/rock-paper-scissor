@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Rock, Paper, Scissor</title>
+  </head>
+  <body>
+    #Pseudo code Create a function that represents the computer player. The
+    computer player will randomly return either rock, paper, or scissor. Create
+    a user prompt to that lets you easily choose which (rock, paper, scissors)
+    you would like to play. Make this input case insensitive. Create logic of
+    paper > rock > scissors > paper Create a function that takes user input and
+    plays it against computer random selection. This function will be how we
+    define a round of play. Write a function called 'game', which will run for 5
+    rounds. Create a loop to increment scoring for both sides. Return a
+    declaration of the winner.
+
+    <script>
+      let options = ['rock', 'paper', 'scissor'];
+      let playerScore = 0;
+      let computerScore = 0;
+
+      function getComputerPlay() {
+        let random = Math.floor(Math.random() * options.length);
+        let computerSelection = options[random];
+        return computerSelection;
+      }
+
+      function getUserPlay() {
+        let userSelection = prompt(
+          'Do you want to pick rock, paper, or scissor?'
+        ).toLowerCase();
+        while (!options.includes(userSelection)) {
+          alert(
+            'You need to choose either rock, paper or scissor if you want to play.'
+          );
+          getUserPlay();
+        }
+        return userSelection;
+      }
+
+      function playOneRound(userSelection, computerSelection) {
+        if (userSelection === computerSelection) {
+          console.log('Tie game.');
+        } else if (
+          (userSelection === 'rock' && computerSelection === 'scissor') ||
+          (userSelection === 'paper' && computerSelection === 'rock') ||
+          (userSelection === 'scissor' && computerSelection === 'paper')
+        ) {
+          console.log(`You win! ${userSelection} beats ${computerSelection}.`);
+          playerScore++;
+        } else {
+          console.log(`You lose. ${computerSelection} beats ${userSelection}.`);
+          computerScore++;
+        }
+        console.log(
+          `Current score: You: ${playerScore} - Computer: ${computerScore} `
+        );
+      }
+    </script>
+  </body>
+</html>
