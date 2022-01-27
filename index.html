@@ -21,17 +21,15 @@
       let options = ['rock', 'paper', 'scissor'];
       let userScore = 0;
       let computerScore = 0;
-      let userSelection;
-      let computerSelection;
 
       function getComputerPlay() {
         let random = Math.floor(Math.random() * options.length);
-        computerSelection = options[random];
+        let computerSelection = options[random];
         return computerSelection;
       }
 
       function getUserPlay() {
-        userSelection = prompt(
+        let userSelection = prompt(
           'Do you want to pick rock, paper, or scissor?'
         ).toLowerCase();
         while (!options.includes(userSelection)) {
