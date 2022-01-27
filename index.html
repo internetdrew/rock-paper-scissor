@@ -21,15 +21,17 @@
       let options = ['rock', 'paper', 'scissor'];
       let userScore = 0;
       let computerScore = 0;
+      let userSelection;
+      let computerSelection;
 
       function getComputerPlay() {
         let random = Math.floor(Math.random() * options.length);
-        let computerSelection = options[random];
+        computerSelection = options[random];
         return computerSelection;
       }
 
       function getUserPlay() {
-        let userSelection = prompt(
+        userSelection = prompt(
           'Do you want to pick rock, paper, or scissor?'
         ).toLowerCase();
         while (!options.includes(userSelection)) {
@@ -41,7 +43,9 @@
         return userSelection;
       }
 
-      function playOneRound(userSelection, computerSelection) {
+      function playOneRound() {
+        getComputerPlay();
+        getUserPlay();
         if (userSelection === computerSelection) {
           console.log(`Tie! You both played ${userSelection}.`);
         } else if (
@@ -57,12 +61,38 @@
           console.log(`You lose. ${computerSelection} beats ${userSelection}.`);
           computerScore++;
         }
-        return `You have ${userScore} points. The computer has ${computerScore} points.`;
+        console.log(
+          `You have ${userScore} points. The computer has ${computerScore} points.`
+        );
       }
 
       function capitalize(str) {
         let newStr = str[0].toUpperCase() + str.slice(1);
         return newStr;
+      }
+
+      function refreshSelections() {
+        userSelection = '';
+        computerSelection = '';
+      }
+
+      function game() {
+        playOneRound();
+        playOneRound();
+        playOneRound();
+        playOneRound();
+        playOneRound();
+        endGame();
+      }
+
+      function endGame() {
+        if (userScore > computerScore) {
+          alert(
+            `You did it. You've beat the computer ${userScore} to ${computerScore}!`
+          );
+        } else {
+          alert('You let a robot smoke you, dude!');
+        }
       }
     </script>
   </body>
