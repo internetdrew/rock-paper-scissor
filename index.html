@@ -7,24 +7,33 @@
     <title>Rock, Paper, Scissor</title>
   </head>
   <body>
-    #Pseudo code Create a function that represents the computer player. The
-    computer player will randomly return either rock, paper, or scissor. Create
-    a user prompt to that lets you easily choose which (rock, paper, scissors)
-    you would like to play. Make this input case insensitive. Create logic of
-    paper > rock > scissors > paper Create a function that takes user input and
-    plays it against computer random selection. This function will be how we
-    define a round of play. Write a function called 'game', which will run for 5
-    rounds. Create a loop to increment scoring for both sides. Return a
-    declaration of the winner.
-
+    <h1>Test</h1>
     <script>
+      // Play 5-round game.
+      function game() {
+        let userScore = 0;
+        let computerScore = 0;
+
+        for (let i = 1; i <= 5; i++) {
+          let winner = playOneRound();
+          if (winner === 'user') {
+            userScore++;
+          } else if (winner === 'computer') {
+            computerScore++;
+          }
+          announceCurrentScore(userScore, computerScore);
+        }
+        announceGameTotals(userScore, computerScore);
+      }
+
       function playOneRound() {
         let computerSelection = getComputerPlay();
         let userSelection = getUserPlay();
-
-        let winner = determineWinner(computerSelection, userSelection);
-
-        addOnePoint(winner);
+        let roundWinner = determineRoundWinner(
+          computerSelection,
+          userSelection
+        );
+        return roundWinner;
       }
 
       function capitalize(str) {
@@ -59,11 +68,12 @@
         }
       }
 
-      function determineWinner(computerSelection, userSelection) {
-        let winner;
+      function determineRoundWinner(computerSelection, userSelection) {
+        let roundWinner;
         if (userSelection === computerSelection) {
           console.log(`Tie! You both played ${userSelection}.`);
-          return (winner = null);
+          roundWinner = null;
+          return;
         } else if (
           (userSelection === 'rock' && computerSelection === 'scissor') ||
           (userSelection === 'paper' && computerSelection === 'rock') ||
@@ -71,47 +81,32 @@
         ) {
           userSelection = capitalize(userSelection);
           console.log(`You won! ${userSelection} beats ${computerSelection}!`);
-          return (winner = 'user');
+          roundWinner = 'user';
         } else {
           console.log(
             `You lose this one. The computer played ${computerSelection}, which beats your ${userSelection}.`
           );
-          return (winner = 'computer');
+          roundWinner = 'computer';
         }
+        return roundWinner;
       }
 
-      function addOnePoint(winner) {
-        let userPoint = 0;
-        let computerPoint = 0;
-
-        if (winner === null) {
-          return;
-        } else if (winner === 'user') {
-          userPoint++;
-          return userPoint;
-        } else if (user === 'computer') {
-          computerPoint++;
-          return computerPoint;
-        }
+      function announceCurrentScore(userScore, computerScore) {
+        console.log(`Current score:
+              You: ${userScore}
+              CPU: ${computerScore}`);
       }
 
-      function game() {
-        for (let i = 1; i <= 5; i++) {
-          playOneRound();
-        }
-        // endGame();
-      }
-
-      function endGame() {
+      function announceGameTotals(userScore, computerScore) {
         if (userScore > computerScore) {
           alert(
-            `You did it. You've beat the computer ${userScore} to ${computerScore}!`
+            `You did it. You've beat the computer, ${userScore} to ${computerScore}!`
           );
+        } else if (userScore === computerScore) {
+          alert(`You and the computer tied at ${userScore}.`);
         } else {
-          alert('You let a robot smoke you, dude!');
+          alert(`You lost to the computer, ${computerScore} to ${userScore}.`);
         }
-        userScore = 0;
-        computerScore = 0;
       }
     </script>
   </body>
