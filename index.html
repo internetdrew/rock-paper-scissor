@@ -19,13 +19,12 @@
 
     <script>
       function playOneRound() {
-        let userScore = 0;
-        let computerScore = 0;
-
         let computerSelection = getComputerPlay();
         let userSelection = getUserPlay();
 
-        comparePlays(computerSelection, userSelection);
+        let winner = determineWinner(computerSelection, userSelection);
+
+        addOnePoint(winner);
       }
 
       function capitalize(str) {
@@ -60,9 +59,11 @@
         }
       }
 
-      function comparePlays(computerSelection, userSelection) {
+      function determineWinner(computerSelection, userSelection) {
+        let winner;
         if (userSelection === computerSelection) {
           console.log(`Tie! You both played ${userSelection}.`);
+          return (winner = null);
         } else if (
           (userSelection === 'rock' && computerSelection === 'scissor') ||
           (userSelection === 'paper' && computerSelection === 'rock') ||
@@ -70,23 +71,35 @@
         ) {
           userSelection = capitalize(userSelection);
           console.log(`You won! ${userSelection} beats ${computerSelection}!`);
-          userScore++;
+          return (winner = 'user');
         } else {
           console.log(
             `You lose this one. The computer played ${computerSelection}, which beats your ${userSelection}.`
           );
-          computerScore++;
+          return (winner = 'computer');
         }
-        console.log(
-          `You have ${userScore} points. The computer has ${computerScore} points.`
-        );
+      }
+
+      function addOnePoint(winner) {
+        let userPoint = 0;
+        let computerPoint = 0;
+
+        if (winner === null) {
+          return;
+        } else if (winner === 'user') {
+          userPoint++;
+          return userPoint;
+        } else if (user === 'computer') {
+          computerPoint++;
+          return computerPoint;
+        }
       }
 
       function game() {
-        for (let i = 0; i <= 5; i++) {
+        for (let i = 1; i <= 5; i++) {
           playOneRound();
         }
-        endGame();
+        // endGame();
       }
 
       function endGame() {
