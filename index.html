@@ -25,25 +25,7 @@
         let computerSelection = getComputerPlay();
         let userSelection = getUserPlay();
 
-        if (userSelection === computerSelection) {
-          console.log(`Tie! You both played ${userSelection}.`);
-        } else if (
-          (userSelection === 'rock' && computerSelection === 'scissor') ||
-          (userSelection === 'paper' && computerSelection === 'rock') ||
-          (userSelection === 'scissor' && computerSelection === 'paper')
-        ) {
-          userSelection = capitalize(userSelection);
-          console.log(`You won! ${userSelection} beats ${computerSelection}!`);
-          userScore++;
-        } else {
-          console.log(
-            `You lose this one. The computer played ${computerSelection}, which beats your ${userSelection}.`
-          );
-          computerScore++;
-        }
-        console.log(
-          `You have ${userScore} points. The computer has ${computerScore} points.`
-        );
+        comparePlays(computerSelection, userSelection);
       }
 
       function capitalize(str) {
@@ -78,12 +60,32 @@
         }
       }
 
+      function comparePlays(computerSelection, userSelection) {
+        if (userSelection === computerSelection) {
+          console.log(`Tie! You both played ${userSelection}.`);
+        } else if (
+          (userSelection === 'rock' && computerSelection === 'scissor') ||
+          (userSelection === 'paper' && computerSelection === 'rock') ||
+          (userSelection === 'scissor' && computerSelection === 'paper')
+        ) {
+          userSelection = capitalize(userSelection);
+          console.log(`You won! ${userSelection} beats ${computerSelection}!`);
+          userScore++;
+        } else {
+          console.log(
+            `You lose this one. The computer played ${computerSelection}, which beats your ${userSelection}.`
+          );
+          computerScore++;
+        }
+        console.log(
+          `You have ${userScore} points. The computer has ${computerScore} points.`
+        );
+      }
+
       function game() {
-        playOneRound();
-        playOneRound();
-        playOneRound();
-        playOneRound();
-        playOneRound();
+        for (let i = 0; i <= 5; i++) {
+          playOneRound();
+        }
         endGame();
       }
 
