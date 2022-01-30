@@ -18,34 +18,13 @@
     declaration of the winner.
 
     <script>
-      let options = ['rock', 'paper', 'scissor'];
-      let userScore = 0;
-      let computerScore = 0;
-      let userSelection;
-      let computerSelection;
-
-      function getComputerPlay() {
-        let random = Math.floor(Math.random() * options.length);
-        computerSelection = options[random];
-        return computerSelection;
-      }
-
-      function getUserPlay() {
-        userSelection = prompt(
-          'Do you want to pick rock, paper, or scissor?'
-        ).toLowerCase();
-        while (!options.includes(userSelection)) {
-          alert(
-            'You need to choose either rock, paper or scissor if you want to play.'
-          );
-          getUserPlay();
-        }
-        return userSelection;
-      }
-
       function playOneRound() {
-        getComputerPlay();
-        getUserPlay();
+        let userScore = 0;
+        let computerScore = 0;
+
+        let computerSelection = getComputerPlay();
+        let userSelection = getUserPlay();
+
         if (userSelection === computerSelection) {
           console.log(`Tie! You both played ${userSelection}.`);
         } else if (
@@ -57,8 +36,9 @@
           console.log(`You won! ${userSelection} beats ${computerSelection}!`);
           userScore++;
         } else {
-          computerSelection = capitalize(computerSelection);
-          console.log(`You lose. ${computerSelection} beats ${userSelection}.`);
+          console.log(
+            `You lose this one. The computer played ${computerSelection}, which beats your ${userSelection}.`
+          );
           computerScore++;
         }
         console.log(
@@ -67,8 +47,35 @@
       }
 
       function capitalize(str) {
-        let newStr = str[0].toUpperCase() + str.slice(1);
+        let newStr = str[0].toUpperCase() + str.slice(1).toLowerCase();
         return newStr;
+      }
+
+      function getComputerPlay() {
+        let options = ['rock', 'paper', 'scissor'];
+        let random = Math.floor(Math.random() * options.length);
+        computerSelection = options[random];
+        return computerSelection;
+      }
+
+      function getUserPlay() {
+        userSelection = prompt(
+          'Do you want to pick rock, paper, or scissor?'
+        ).toLowerCase();
+        if (
+          !(
+            userSelection === 'rock' ||
+            userSelection === 'paper' ||
+            userSelection === 'scissor'
+          )
+        ) {
+          alert(
+            'You need to choose either rock, paper or scissor if you want to play.'
+          );
+          getUserPlay();
+        } else {
+          return userSelection;
+        }
       }
 
       function game() {
