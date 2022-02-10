@@ -4,111 +4,51 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./styles.css" />
+    <script src="./app.js" defer></script>
     <title>Rock, Paper, Scissor</title>
   </head>
   <body>
-    <h1>Let's play... Rock, Paper, Scissor!</h1>
-    <script>
-      // Play 5-round game.
-      function game() {
-        let userScore = 0;
-        let computerScore = 0;
+    <header></header>
+    <main>
+      <h1>Rock 🪨, Paper 📄, Scissor ✂️!</h1>
 
-        for (let i = 1; i <= 5; i++) {
-          let winner = playOneRound();
-          if (winner === 'user') {
-            userScore++;
-          } else if (winner === 'computer') {
-            computerScore++;
-          }
-          announceCurrentScore(userScore, computerScore);
-        }
-        announceGameTotals(userScore, computerScore);
-      }
+      <div class="name-prompt hidden"></div>
 
-      function playOneRound() {
-        let computerSelection = getComputerPlay();
-        let userSelection = getUserPlay();
-        let roundWinner = determineRoundWinner(
-          computerSelection,
-          userSelection
-        );
-        return roundWinner;
-      }
+      <div class="game">
+        <div class="scoreboard">
+          <h2>Scores</h2>
+          <div class="score-split">
+            <div class="score-side score-left" id="user-score">
+              <div class="player-title stats">You</div>
+              <div class="score stats">0</div>
+            </div>
+            <div class="score-side score-right">
+              <div class="player-title stats">Robot</div>
+              <div class="score stats">0</div>
+            </div>
+          </div>
+        </div>
 
-      function capitalize(str) {
-        let newStr = str[0].toUpperCase() + str.slice(1).toLowerCase();
-        return newStr;
-      }
+        <div class="game-board">
+          <div class="column left-col">
+            <div class="player-id" id="user">You</div>
+            <div class="choice" id="user-choice">?</div>
+          </div>
+          <div class="column mid-col">vs</div>
+          <div class="column right-col">
+            <div class="player-id" id="cpu">Robot</div>
+            <div class="choice" id="cpu-choice">?</div>
+          </div>
+        </div>
 
-      function getComputerPlay() {
-        let options = ['rock', 'paper', 'scissor'];
-        let random = Math.floor(Math.random() * options.length);
-        computerSelection = options[random];
-        return computerSelection;
-      }
-
-      function getUserPlay() {
-        userSelection = prompt(
-          'Do you want to pick rock, paper, or scissor?'
-        ).toLowerCase();
-        if (
-          !(
-            userSelection === 'rock' ||
-            userSelection === 'paper' ||
-            userSelection === 'scissor'
-          )
-        ) {
-          alert(
-            'You need to choose either rock, paper or scissor if you want to play.'
-          );
-          getUserPlay();
-        } else {
-          return userSelection;
-        }
-      }
-
-      function determineRoundWinner(computerSelection, userSelection) {
-        let roundWinner;
-        if (userSelection === computerSelection) {
-          console.log(`Tie! You both played ${userSelection}.`);
-          roundWinner = null;
-          return;
-        } else if (
-          (userSelection === 'rock' && computerSelection === 'scissor') ||
-          (userSelection === 'paper' && computerSelection === 'rock') ||
-          (userSelection === 'scissor' && computerSelection === 'paper')
-        ) {
-          userSelection = capitalize(userSelection);
-          console.log(`You won! ${userSelection} beats ${computerSelection}!`);
-          roundWinner = 'user';
-        } else {
-          console.log(
-            `You lose this one. The computer played ${computerSelection}, which beats your ${userSelection}.`
-          );
-          roundWinner = 'computer';
-        }
-        return roundWinner;
-      }
-
-      function announceCurrentScore(userScore, computerScore) {
-        console.log(`Current score:
-              You: ${userScore}
-              CPU: ${computerScore}`);
-        return { userScore, computerScore };
-      }
-
-      function announceGameTotals(userScore, computerScore) {
-        if (userScore > computerScore) {
-          alert(
-            `You did it. You've beat the computer, ${userScore} to ${computerScore}!`
-          );
-        } else if (userScore === computerScore) {
-          alert(`You and the computer tied at ${userScore}.`);
-        } else {
-          alert(`You lost to the computer, ${computerScore} to ${userScore}.`);
-        }
-      }
-    </script>
+        <div class="button-container">
+          <button>Rock</button>
+          <button>Paper</button>
+          <button>Scissor</button>
+        </div>
+      </div>
+    </main>
+    <footer></footer>
   </body>
 </html>
