@@ -3,15 +3,16 @@
   border: 0;
   box-sizing: border-box;
   font-size: 62.5%;
+  font-family: monospace;
 }
 
 body {
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: space-around;
   align-items: center;
   font-size: 14rem;
-  height: 100vh;
+  min-height: 100vh;
   background: #f2e9e4;
 }
 
@@ -45,7 +46,8 @@ main {
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
-  gap: 2rem;
+  gap: 1rem;
+  font-size: 12rem;
 }
 
 .game-board {
@@ -101,4 +103,28 @@ main {
 .choice {
   font-size: 2.2rem;
   font-weight: bold;
+}
+
+#calling-card,
+#me a {
+  font-size: 2.3rem;
+}
+
+#me a {
+  animation: color-change 1s infinite;
+}
+@keyframes color-change {
+  0% {
+    color: #000000;
+  }
+  50% {
+    color: #ff499e;
+  }
+  100% {
+    color: #000000;
+  }
+}
+
+a {
+  text-decoration: none;
 }
