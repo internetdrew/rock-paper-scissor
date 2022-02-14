@@ -9,21 +9,26 @@
     <title>Rock, Paper, Scissor</title>
   </head>
   <body>
-    <header><h1>Rock 🪨 | Paper 📄 | Scissor ✂️</h1></header>
+    <header>
+      <h1>Rock, Paper, Scissor</h1>
+    </header>
     <main>
-      <div class="name-prompt hidden"></div>
-
-      <div class="game">
+      <div class="play-container">
+        <button id="play-button">Let's Play</button>
+        <button class="hidden" id="reset-button">Play Again</button>
+      </div>
+      <div class="game hidden">
+        <div class="prompts"></div>
         <div class="scoreboard">
           <h2>Scores</h2>
           <div class="score-split">
-            <div class="score-side score-left" id="user-score">
+            <div class="score-side score-left">
               <div class="player-title stats">You</div>
-              <div class="score stats">0</div>
+              <div class="score stats" id="user-score">0</div>
             </div>
             <div class="score-side score-right">
               <div class="player-title stats">Robot</div>
-              <div class="score stats">0</div>
+              <div class="score stats" id="cpu-score">0</div>
             </div>
           </div>
         </div>
@@ -41,9 +46,9 @@
         </div>
 
         <div class="button-container">
-          <button>Rock</button>
-          <button>Paper</button>
-          <button>Scissor</button>
+          <button class="user-selection" value="rock">Rock</button>
+          <button class="user-selection" value="paper">Paper</button>
+          <button class="user-selection" value="scissor">Scissor</button>
         </div>
       </div>
     </main>

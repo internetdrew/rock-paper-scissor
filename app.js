@@ -1,3 +1,6 @@
+const playButton = document.querySelector('#play-button');
+const gameView = document.querySelector('.game');
+
 // Play 5-round game.
 function game() {
   let userScore = 0;
@@ -35,23 +38,15 @@ function getComputerPlay() {
 }
 
 function getUserPlay() {
-  userSelection = prompt(
-    'Do you want to pick rock, paper, or scissor?'
-  ).toLowerCase();
-  if (
-    !(
-      userSelection === 'rock' ||
-      userSelection === 'paper' ||
-      userSelection === 'scissor'
-    )
-  ) {
-    alert(
-      'You need to choose either rock, paper or scissor if you want to play.'
-    );
-    getUserPlay();
-  } else {
-    return userSelection;
-  }
+  const rockButton = document.querySelector('#rock');
+  const paperButton = document.querySelecrtor('#paper');
+  const scissorButton = document.querySelecrtor('#scissor');
+
+  const buttonContainer = document.querySelector('.button-container');
+  let userSelection = buttonContainer.addEventListener('click', (event) => {
+    if (event.target.nodeName !== 'DIV') event.target.value;
+  });
+  return userSelection;
 }
 
 function determineRoundWinner(computerSelection, userSelection) {
@@ -95,3 +90,9 @@ function announceGameTotals(userScore, computerScore) {
     alert(`You lost to the computer, ${computerScore} to ${userScore}.`);
   }
 }
+
+// Events
+playButton.addEventListener('click', (event) => {
+  gameView.classList.remove('hidden');
+  playButton.classList.add('hidden');
+});
