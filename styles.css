@@ -2,8 +2,9 @@
   margin: 0;
   border: 0;
   box-sizing: border-box;
+}
+html {
   font-size: 62.5%;
-  font-family: monospace;
 }
 
 body {
@@ -11,7 +12,8 @@ body {
   flex-direction: column;
   justify-content: space-around;
   align-items: center;
-  font-size: 14rem;
+  font-size: 1.4rem;
+  font-family: monospace;
   min-height: 100vh;
   background: #f2e9e4;
 }
@@ -48,13 +50,19 @@ main {
   align-items: center;
 }
 
+.prompt {
+  font-size: 2rem;
+  text-align: center;
+  line-height: 1.5;
+}
+
 .game {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
   gap: 1rem;
-  font-size: 12rem;
+  /* font-size: rem; */
 }
 
 .game-board {
@@ -78,10 +86,6 @@ main {
 .hidden {
   display: none;
   position: absolute;
-}
-
-.transition {
-  transition-duration: 2000ms;
 }
 
 .scoreboard {
@@ -120,7 +124,7 @@ main {
 
 #calling-card,
 #me a {
-  font-size: 2.3rem;
+  font-size: 1.8rem;
 }
 
 #me a {

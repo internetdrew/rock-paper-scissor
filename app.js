@@ -1,6 +1,3 @@
-const playButton = document.querySelector('#play-button');
-const gameView = document.querySelector('.game');
-
 // Play 5-round game.
 function game() {
   let userScore = 0;
@@ -92,7 +89,14 @@ function announceGameTotals(userScore, computerScore) {
 }
 
 // Events
-playButton.addEventListener('click', (event) => {
-  gameView.classList.remove('hidden');
-  playButton.classList.add('hidden');
-});
+playGame();
+
+function playGame() {
+  const playButton = document.querySelector('#play-button');
+  const gameView = document.querySelector('.game');
+
+  playButton.addEventListener('click', (event) => {
+    gameView.classList.remove('hidden');
+    playButton.classList.add('hidden');
+  });
+}
