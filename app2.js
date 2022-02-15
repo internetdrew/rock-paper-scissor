@@ -1,4 +1,7 @@
 const buttons = document.querySelector('.user-options');
+const displayDiv = document.querySelector('#display');
+const userChoice = document.querySelector('#user-choice');
+const compChoice = document.querySelector('#comp-choice');
 
 function capitalize(str) {
   let newStr = str[0].toUpperCase() + str.slice(1).toLowerCase();
@@ -15,7 +18,7 @@ function getComputerPlay() {
 function determineRoundWinner(computerSelection, userSelection) {
   let roundWinner;
   if (userSelection === computerSelection) {
-    console.log(`Tie! You both played ${userSelection}.`);
+    displayDiv.textContent = `Tie! You both played ${userSelection}.`;
     roundWinner = null;
     return;
   } else if (
@@ -24,24 +27,43 @@ function determineRoundWinner(computerSelection, userSelection) {
     (userSelection === 'scissor' && computerSelection === 'paper')
   ) {
     userSelection = capitalize(userSelection);
-    console.log(`You won! ${userSelection} beats ${computerSelection}!`);
+    displayDiv.textContent = `You won! ${userSelection} beats ${computerSelection}!`;
     roundWinner = 'user';
   } else {
-    console.log(
-      `You lose this one. The computer played ${computerSelection}, which beats your ${userSelection}.`
-    );
+    displayDiv.textContent = `You lose this one. The computer played ${computerSelection}, which beats your ${userSelection}.`;
     roundWinner = 'computer';
   }
   return roundWinner;
+}
+
+function displayPicks(userSelection, computerSelection, roundWinner) {
+  userChoice.textContent = userSelection;
+  compChoice.textContent = computerSelection;
+  console.log(roundWinner);
+  switch (roundWinner) {
+    case 'user':
+      userChoice.style.color = 'green';
+      compChoice.style.color = 'red';
+      break;
+    case 'computer':
+      userChoice.style.color = 'red';
+      compChoice.style.color = 'green';
+      break;
+    default:
+      userChoice.style.color = '#333';
+      compChoice.style.color = '#333';
+      break;
+  }
 }
 
 function playRound(userPick) {
   let userSelection = userPick;
   let computerSelection = getComputerPlay();
   let roundWinner = determineRoundWinner(computerSelection, userSelection);
+  displayPicks(userSelection, computerSelection, roundWinner);
 }
 
-// Event Listeners
+// Event Listener to play
 buttons.addEventListener('click', function (e) {
   if (e.target.nodeName === 'BUTTON') {
     let userPick = e.target.value;
