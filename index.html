@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="./styles.css" />
-    <script src="./app.js" defer></script>
+    <script src="./app2.js" defer></script>
     <title>Rock, Paper, Scissor</title>
   </head>
   <body>
@@ -14,10 +14,13 @@
     </header>
     <main>
       <div class="game">
-        <div class="prompt">
-          Click a button below to play rock, paper, or scissor. <br /><strong
-            >First one to 5 points wins!</strong
-          >
+        <div class="comms">
+          <p>
+            Click a button below to play rock, paper, or scissor. <br /><strong
+              >First one to 5 points wins!</strong
+            >
+          </p>
+          <div id="display"></div>
         </div>
         <div class="scoreboard">
           <h2>Scores</h2>
@@ -27,25 +30,25 @@
               <div class="score stats" id="user-score">0</div>
             </div>
             <div class="score-side score-right">
-              <div class="player-title stats">Robot</div>
-              <div class="score stats" id="cpu-score">0</div>
+              <div class="player-title stats">Computer</div>
+              <div class="score stats" id="comp-score">0</div>
             </div>
           </div>
         </div>
 
         <div class="game-board">
           <div class="column left-col">
-            <div class="player-id" id="user">You</div>
+            <div class="player-id">You</div>
             <div class="choice" id="user-choice">?</div>
           </div>
           <div class="column mid-col">vs</div>
           <div class="column right-col">
-            <div class="player-id" id="cpu">Robot</div>
-            <div class="choice" id="cpu-choice">?</div>
+            <div class="player-id">Computer</div>
+            <div class="choice" id="comp-choice">?</div>
           </div>
         </div>
 
-        <div class="button-container">
+        <div class="user-options">
           <button class="user-selection" id="rock" value="rock">Rock</button>
           <button class="user-selection" id="paper" value="paper">Paper</button>
           <button class="user-selection" id="scissor" value="scissor">
