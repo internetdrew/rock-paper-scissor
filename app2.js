@@ -2,6 +2,11 @@ const buttons = document.querySelector('.user-options');
 const displayDiv = document.querySelector('#display');
 const userChoice = document.querySelector('#user-choice');
 const compChoice = document.querySelector('#comp-choice');
+let userScoreDiv = document.querySelector('#user-score');
+let compScoreDiv = document.querySelector('#comp-score');
+
+let runningUserTotal = 0;
+let runningCompTotal = 0;
 
 function capitalize(str) {
   let newStr = str[0].toUpperCase() + str.slice(1).toLowerCase();
@@ -56,11 +61,28 @@ function displayPicks(userSelection, computerSelection, roundWinner) {
   }
 }
 
+function addScore(roundWinner) {
+  if (roundWinner === 'user') {
+    runningUserTotal++;
+    userScoreDiv.textContent = runningUserTotal;
+  } else if (roundWinner === 'computer') {
+    runningCompTotal++;
+    compScoreDiv.textContent = runningCompTotal;
+  } else {
+    return;
+  }
+}
+
 function playRound(userPick) {
   let userSelection = userPick;
   let computerSelection = getComputerPlay();
   let roundWinner = determineRoundWinner(computerSelection, userSelection);
   displayPicks(userSelection, computerSelection, roundWinner);
+  addScore(roundWinner);
+
+  if (runningCompTotal === 5 || runningUserTotal === 5) {
+    console.log('game over');
+  }
 }
 
 // Event Listener to play

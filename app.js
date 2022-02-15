@@ -1,30 +1,25 @@
 // Play 5-round game.
-function game() {
-  let userScore = 0;
-  let computerScore = 0;
+// function game() {
+//   let userScore = 0;
+//   let computerScore = 0;
 
-//   for (let i = 1; i <= 5; i++) {
-//     let winner = playOneRound();
-//     if (winner === 'user') {
-//       userScore++;
-//     } else if (winner === 'computer') {
-//       computerScore++;
-//     }
-//     announceCurrentScore(userScore, computerScore);
-//   }
-//   announceGameTotals(userScore, computerScore);
-// }
+// //   for (let i = 1; i <= 5; i++) {
+// //     let winner = playOneRound();
+// //     if (winner === 'user') {
+// //       userScore++;
+// //     } else if (winner === 'computer') {
+// //       computerScore++;
+// //     }
+// //     announceCurrentScore(userScore, computerScore);
+// //   }
+// //   announceGameTotals(userScore, computerScore);
+// // }
 
 function playOneRound() {
   let computerSelection = getComputerPlay();
   let userSelection = getUserPlay();
   let roundWinner = determineRoundWinner(computerSelection, userSelection);
   return roundWinner;
-}
-
-function capitalize(str) {
-  let newStr = str[0].toUpperCase() + str.slice(1).toLowerCase();
-  return newStr;
 }
 
 function getComputerPlay() {

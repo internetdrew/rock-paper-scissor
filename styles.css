@@ -45,6 +45,11 @@ main {
   align-items: center;
 }
 
+.container #display {
+  max-width: 40rem;
+  text-align: center;
+}
+
 .play-container {
   display: flex;
   justify-content: center;
