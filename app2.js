@@ -1,6 +1,4 @@
-const rock = document.querySelector('#rock');
-const paper = document.querySelector('#paper');
-const scissor = document.querySelector('#scissor');
+const buttons = document.querySelector('.user-options');
 
 function capitalize(str) {
   let newStr = str[0].toUpperCase() + str.slice(1).toLowerCase();
@@ -37,13 +35,16 @@ function determineRoundWinner(computerSelection, userSelection) {
   return roundWinner;
 }
 
-function playRound(event) {
-  let userSelection = event.target.value;
+function playRound(userPick) {
+  let userSelection = userPick;
   let computerSelection = getComputerPlay();
   let roundWinner = determineRoundWinner(computerSelection, userSelection);
 }
 
 // Event Listeners
-rock.addEventListener('click', playRound);
-paper.addEventListener('click', playRound);
-scissor.addEventListener('click', playRound);
+buttons.addEventListener('click', function (e) {
+  if (e.target.nodeName === 'BUTTON') {
+    let userPick = e.target.value;
+    playRound(userPick);
+  }
+});
