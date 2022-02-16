@@ -1,25 +1,23 @@
-// Play 5-round game.
-// function game() {
-//   let userScore = 0;
-//   let computerScore = 0;
+const game = document.getElementById('game');
+const outro = document.getElementById('outro');
+const resetContainer = document.querySelector('.reset-container');
+const playAgain = document.querySelector('#play-again');
 
-//   for (let i = 1; i <= 5; i++) {
-//     let winner = playOneRound();
-//     if (winner === 'user') {
-//       userScore++;
-//     } else if (winner === 'computer') {
-//       computerScore++;
-//     }
-//     announceCurrentScore(userScore, computerScore);
-//   }
-//   announceGameTotals(userScore, computerScore);
-// }
+const lossGif = document.querySelector('#loss-gif');
+const winGif = document.querySelector('#win-gif');
+const buttons = document.querySelector('.user-options');
+const displayDiv = document.querySelector('#display');
+const userChoice = document.querySelector('#user-choice');
+const compChoice = document.querySelector('#comp-choice');
+let userScoreDiv = document.querySelector('#user-score');
+let compScoreDiv = document.querySelector('#comp-score');
 
-function playOneRound() {
-  let computerSelection = getComputerPlay();
-  let userSelection = getUserPlay();
-  let roundWinner = determineRoundWinner(computerSelection, userSelection);
-  return roundWinner;
+let runningUserTotal = 0;
+let runningCompTotal = 0;
+
+function capitalize(str) {
+  let newStr = str[0].toUpperCase() + str.slice(1).toLowerCase();
+  return newStr;
 }
 
 function getComputerPlay() {
@@ -29,22 +27,10 @@ function getComputerPlay() {
   return computerSelection;
 }
 
-function getUserPlay() {
-  const rockButton = document.querySelector('#rock');
-  const paperButton = document.querySelecrtor('#paper');
-  const scissorButton = document.querySelecrtor('#scissor');
-
-  const buttonContainer = document.querySelector('.button-container');
-  let userSelection = buttonContainer.addEventListener('click', (event) => {
-    if (event.target.nodeName !== 'DIV') event.target.value;
-  });
-  return userSelection;
-}
-
 function determineRoundWinner(computerSelection, userSelection) {
   let roundWinner;
   if (userSelection === computerSelection) {
-    console.log(`Tie! You both played ${userSelection}.`);
+    displayDiv.textContent = `Tie! You both played ${userSelection}.`;
     roundWinner = null;
     return;
   } else if (
@@ -52,46 +38,88 @@ function determineRoundWinner(computerSelection, userSelection) {
     (userSelection === 'paper' && computerSelection === 'rock') ||
     (userSelection === 'scissor' && computerSelection === 'paper')
   ) {
-    userSelection = capitalize(userSelection);
-    console.log(`You won! ${userSelection} beats ${computerSelection}!`);
+    displayDiv.textContent = `You won! ${capitalize(
+      userSelection
+    )} beats ${computerSelection}!`;
     roundWinner = 'user';
   } else {
-    console.log(
-      `You lose this one. The computer played ${computerSelection}, which beats your ${userSelection}.`
-    );
+    displayDiv.textContent = `You lose this one. The computer played ${computerSelection}, which beats your ${userSelection}.`;
     roundWinner = 'computer';
   }
   return roundWinner;
 }
 
-function announceCurrentScore(userScore, computerScore) {
-  console.log(`Current score:
-              You: ${userScore}
-              CPU: ${computerScore}`);
-  return { userScore, computerScore };
-}
-
-function announceGameTotals(userScore, computerScore) {
-  if (userScore > computerScore) {
-    alert(
-      `You did it. You've beat the computer, ${userScore} to ${computerScore}!`
-    );
-  } else if (userScore === computerScore) {
-    alert(`You and the computer tied at ${userScore}.`);
-  } else {
-    alert(`You lost to the computer, ${computerScore} to ${userScore}.`);
+function displayPicks(userSelection, computerSelection, roundWinner) {
+  userChoice.textContent = userSelection;
+  compChoice.textContent = computerSelection;
+  switch (roundWinner) {
+    case 'user':
+      userChoice.style.color = 'green';
+      compChoice.style.color = 'red';
+      break;
+    case 'computer':
+      userChoice.style.color = 'red';
+      compChoice.style.color = 'green';
+      break;
+    default:
+      userChoice.style.color = '#333';
+      compChoice.style.color = '#333';
+      break;
   }
 }
 
-// Events
-playGame();
-
-function playGame() {
-  const playButton = document.querySelector('#play-button');
-  const gameView = document.querySelector('.game');
-
-  playButton.addEventListener('click', (event) => {
-    gameView.classList.remove('hidden');
-    playButton.classList.add('hidden');
-  });
+function addScore(roundWinner) {
+  if (roundWinner === 'user') {
+    ++runningUserTotal;
+    userScoreDiv.textContent = runningUserTotal;
+  } else if (roundWinner === 'computer') {
+    ++runningCompTotal;
+    compScoreDiv.textContent = runningCompTotal;
+  } else {
+    return;
+  }
 }
+
+function endGame() {
+  console.log('game should be over now');
+  game.classList.add('disabled');
+  console.log(game);
+  game.classList.add('hidden');
+}
+
+function promptReset() {
+  resetContainer.classList.remove('hidden');
+  resetContainer.classList.add('show-exit');
+
+  if (runningCompTotal === 5) {
+    outro.textContent = `The computer beat you, ${runningCompTotal} to ${runningUserTotal}.`;
+    lossGif.classList.remove('hidden');
+  } else {
+    outro.textContent = `You gave that computer the BUSINESS, ${runningUserTotal} to ${runningCompTotal}!`;
+    winGif.classList.remove('hidden');
+  }
+}
+
+function playRound(userPick) {
+  let userSelection = userPick;
+  let computerSelection = getComputerPlay();
+  let roundWinner = determineRoundWinner(computerSelection, userSelection);
+  displayPicks(userSelection, computerSelection, roundWinner);
+  addScore(roundWinner);
+}
+
+// Event Listener to play
+buttons.addEventListener('click', function (e) {
+  if (e.target.nodeName === 'BUTTON') {
+    let userPick = e.target.value;
+
+    playRound(userPick);
+
+    if (runningCompTotal === 5 || runningUserTotal === 5) {
+      endGame();
+      promptReset();
+    }
+  }
+});
+
+playAgain.addEventListener('click', () => location.reload());

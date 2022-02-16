@@ -159,3 +159,15 @@ a {
 .disabled {
   pointer-events: none;
 }
+
+.reset-container {
+  text-align: center;
+}
+
+.show-exit {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 5rem;
+}
