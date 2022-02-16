@@ -81,9 +81,7 @@ function addScore(roundWinner) {
 }
 
 function endGame() {
-  console.log('game should be over now');
   game.classList.add('disabled');
-  console.log(game);
   game.classList.add('hidden');
 }
 
