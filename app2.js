@@ -1,3 +1,6 @@
+const game = document.getElementById('game');
+const outro = document.getElementById('outro');
+const resetContainer = document.querySelector('.reset-container');
 const buttons = document.querySelector('.user-options');
 const displayDiv = document.querySelector('#display');
 const userChoice = document.querySelector('#user-choice');
@@ -31,8 +34,9 @@ function determineRoundWinner(computerSelection, userSelection) {
     (userSelection === 'paper' && computerSelection === 'rock') ||
     (userSelection === 'scissor' && computerSelection === 'paper')
   ) {
-    userSelection = capitalize(userSelection);
-    displayDiv.textContent = `You won! ${userSelection} beats ${computerSelection}!`;
+    displayDiv.textContent = `You won! ${capitalize(
+      userSelection
+    )} beats ${computerSelection}!`;
     roundWinner = 'user';
   } else {
     displayDiv.textContent = `You lose this one. The computer played ${computerSelection}, which beats your ${userSelection}.`;
@@ -44,7 +48,6 @@ function determineRoundWinner(computerSelection, userSelection) {
 function displayPicks(userSelection, computerSelection, roundWinner) {
   userChoice.textContent = userSelection;
   compChoice.textContent = computerSelection;
-  console.log(roundWinner);
   switch (roundWinner) {
     case 'user':
       userChoice.style.color = 'green';
@@ -63,14 +66,25 @@ function displayPicks(userSelection, computerSelection, roundWinner) {
 
 function addScore(roundWinner) {
   if (roundWinner === 'user') {
-    runningUserTotal++;
+    ++runningUserTotal;
     userScoreDiv.textContent = runningUserTotal;
   } else if (roundWinner === 'computer') {
-    runningCompTotal++;
+    ++runningCompTotal;
     compScoreDiv.textContent = runningCompTotal;
   } else {
     return;
   }
+}
+
+function endGame() {
+  console.log('game should be over now');
+  game.classList.add('disabled');
+  console.log(game);
+  game.classList.add('hidden');
+}
+
+function promptReset() {
+  resetContainer.classList.remove('hidden');
 }
 
 function playRound(userPick) {
@@ -81,8 +95,9 @@ function playRound(userPick) {
   addScore(roundWinner);
 
   if (runningCompTotal === 5 || runningUserTotal === 5) {
-    console.log('game over');
+    endGame();
   }
+  promptReset();
 }
 
 // Event Listener to play

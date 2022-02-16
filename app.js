@@ -3,17 +3,17 @@
 //   let userScore = 0;
 //   let computerScore = 0;
 
-// //   for (let i = 1; i <= 5; i++) {
-// //     let winner = playOneRound();
-// //     if (winner === 'user') {
-// //       userScore++;
-// //     } else if (winner === 'computer') {
-// //       computerScore++;
-// //     }
-// //     announceCurrentScore(userScore, computerScore);
-// //   }
-// //   announceGameTotals(userScore, computerScore);
-// // }
+//   for (let i = 1; i <= 5; i++) {
+//     let winner = playOneRound();
+//     if (winner === 'user') {
+//       userScore++;
+//     } else if (winner === 'computer') {
+//       computerScore++;
+//     }
+//     announceCurrentScore(userScore, computerScore);
+//   }
+//   announceGameTotals(userScore, computerScore);
+// }
 
 function playOneRound() {
   let computerSelection = getComputerPlay();
